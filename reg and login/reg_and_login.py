@@ -1,72 +1,72 @@
 import string
 import random
-import tkinter as tk
+from tkinter import *
 
 users = {'admin': 'password'}
 
 def change_password():
-    username = entry_username.get()
-    old_password = entry_password.get()
-    new_password = entry_password.get()
+    user = entry_username.get()
+    old_passw = entry_passw.get()
+    new_passw = entry_passw.get()
 
-    if username not in users:
-        label_status.config(text='Kasutajanime ei leitud.')
-    elif users[username] != old_password:
-        label_status.config(text='Vale salasõna.')
+    if user not in users:
+        lbl_status.config(text='Kasutajanime ei leitud.')
+    elif users[user] != old_passw:
+        lbl_status.config(text='Vale salasõna.')
     else:
-        users[username] = new_password
-        label_status.config(text='Salasõna muutmine õnnestus.')
+        users[user] = new_passw
+        lbl_status.config(text='Salasõna muutmine õnnestus.')
 
 def validate_input():
-    username = entry_username.get()
-    password = entry_password.get()
-    if not username:
-        label_status.config(text='Kasutajanimi ei tohi olla tühi.')
+    user = entry_username.get()
+    passw = entry_passw.get()
+    if not user:
+        lbl_status.config(text='Kasutajanimi ei tohi olla tühi.')
         return False
-    elif not password:
-        label_status.config(text='Parool ei tohi olla tühi.')
+    elif not passw:
+        lbl_status.config(text='Parool ei tohi olla tühi.')
         return False
-    elif len(password) < 8:
-        label_status.config(text='Parool peab olema vähemalt 8 tähemärki pikk.')
+    elif len(passw) < 8:
+        lbl_status.config(text='Parool peab olema vähemalt 8 tähemärki pikk.')
         return False
-    elif not any(c.isupper() for c in password):
-        label_status.config(text='Parool peab sisaldama vähemalt ühte suurtähte.')
+    elif not any(c.isupper() for c in passw):
+        lbl_status.config(text='Parool peab sisaldama vähemalt ühte suurtähte.')
         return False
-    elif not any(c.islower() for c in password):
-        label_status.config(text='Parool peab sisaldama vähemalt ühte väiketähte.')
+    elif not any(c.islower() for c in passw):
+        lbl_status.config(text='Parool peab sisaldama vähemalt ühte väiketähte.')
         return False
-    elif not any(c.isdigit() for c in password):
-        label_status.config(text='Parool peab sisaldama vähemalt ühte numbrit.')
+    elif not any(c.isdigit() for c in passw):
+        lbl_status.config(text='Parool peab sisaldama vähemalt ühte numbrit.')
         return False
-    elif not any(c in string.punctuation for c in password):
-        label_status.config(text='Parool peab sisaldama vähemalt ühte erimärki.')
+    elif not any(c in string.punctuation for c in passw):
+        lbl_status.config(text='Parool peab sisaldama vähemalt ühte erimärki.')
         return False
     else:
-        label_status.config(text='')
+        lbl_status.config(text='')
         return True
 
 def register():
     if not validate_input():
         return
-    username = entry_username.get()
-    password = entry_password.get()
-    if username in users:
-        label_status.config(text='Kasutajanimi on juba võetud.')
+    user = entry_username.get()
+    passw = entry_passw.get()
+    if user in users:
+        lbl_status.config(text='Kasutajanimi on juba võetud.')
     else:
-        users[username] = password
-        label_status.config(text='Kasutaja registreerimine õnnestus.')
+        users[user] = passw
+        lbl_status.config(text='Kasutaja registreerimine õnnestus.')
 
 def login():
     if not validate_input():
         return
-    username = entry_username.get()
-    password = entry_password.get()
-    if username not in users:
-        label_status.config(text='Kasutajanime ei leitud.')
-    elif users[username] != password:
-        label_status.config(text='Vale salasõna.')
+    user = entry_username.get()
+    passw = entry_passw.get()
+    if user not in users:
+        lbl_status.config(text='Kasutajanime ei leitud.')
+    elif users[user] != passw:
+        lbl_status.config(text='Vale salasõna.')
     else:
-        label_status.config(text='Sisselogimine õnnestus.')
+        lbl_status.config(text='Sisselogimine õnnestus.')
 
 def generate_password():
     while True:
@@ -77,61 +77,61 @@ def generate_password():
             any(char.islower() for char in password) and
             any(char.isdigit() for char in password) and
             any(char in string.punctuation for char in password)):
-            entry_password.delete(0, tk.END)
-            entry_password.insert(0, password)
+            entry_passw.delete(0, END)
+            entry_passw.insert(0, password)
             break
 
 def recover_password():
-    username = entry_username.get()
-    if username not in users:
-        label_status.config(text='Kasutajanime ei leitud.')
+    user = entry_username.get()
+    if user not in users:
+        lbl_status.config(text='Kasutajanime ei leitud.')
     else:
-        password = users[username]
-        label_status.config(text=f'Sinu parool on {password}.')
+        password = users[user]
+        lbl_status.config(text=f'Sinu parool on {password}.')
 
 def change_password():
 
     if not validate_input():
         return
-    username = entry_username.get()
-    password = entry_password.get()
-    if username not in users:
-        label_status.config(text='Kasutajanime ei leitud.')
+    user = entry_username.get()
+    passw = entry_passw.get()
+    if user not in users:
+        lbl_status.config(text='Kasutajanime ei leitud.')
     else:
-        users[username] = password
-        label_status.config(text='Salasõna muutmine õnnestus.')
+        users[user] = passw
+        lbl_status.config(text='Salasõna muutmine õnnestus.')
 
 
-root = tk.Tk()
-root.geometry('400x600')
-root.title('Kasutaja registreerimine ja autoriseerimine')
+aken = Tk()
+aken.geometry('550x600')
+aken.title('Kasutaja registreerimine ja autoriseerimine')
 
-label_username = tk.Label(root, text='Kasutajanimi:', font=('Arial', 14))
-label_username.pack()
-entry_username = tk.Entry(root, font=('Arial', 14))
+lbl_username = Label(aken, text='Kasutajanimi:', font='Arial 14')
+lbl_username.pack(pady=8)
+entry_username = Entry(aken, font='Arial 14', bg='#cccccc')
 entry_username.pack()
 
-label_password = tk.Label(root, text='Salasõna:', font=('Arial', 14))
-label_password.pack()
-entry_password = tk.Entry(root, show='*', font=('Arial', 14))
-entry_password.pack()
+lbl_pass = Label(aken, text='Salasõna:', font='Arial 14')
+lbl_pass.pack(pady=8)
+entry_passw = Entry(aken, show='*', font='Arial 14', bg='#cccccc')
+entry_passw.pack()
 
-button_register = tk.Button(root, text='Registreeri', command=register, font=('Arial', 14))
-button_register.pack(pady=10)
-button_login = tk.Button(root, text='Logi sisse', command=login, font=('Arial', 14))
-button_login.pack()
+btn_reg = Button(aken, text='Registreeri', command=register, font='Arial 14')
+btn_reg.pack(pady=10)
+btn_login = Button(aken, text='Logi sisse', command=login, font='Arial 14')
+btn_login.pack()
 
-label_status = tk.Label(root, text='', font=('Arial', 14))
-label_status.pack(pady=10)
+lbl_status = Label(aken, text='', font='Arial 14', bg='#8c8c8c')
+lbl_status.pack(pady=10)
 
-button_generate = tk.Button(root, text='Loo parool', command=generate_password, font=('Arial', 14))
-button_generate.pack(pady=10)
+btn_generate = Button(aken, text='Loo parool', command=generate_password, font='Arial 14')
+btn_generate.pack(pady=10)
 
-button_recover = tk.Button(root, text='Taasta parool', command=recover_password, font=('Arial', 14))
-button_recover.pack(pady=10)
+btn_recover = Button(aken, text='Taasta parool', command=recover_password, font='Arial 14')
+btn_recover.pack(pady=10)
 
-button_change = tk.Button(root, text='Muuda salasõna', command=change_password, font=('Arial', 14))
-button_change.pack(pady=10)
+btn_change = Button(aken, text='Muuda salasõna', command=change_password, font='Arial 14')
+btn_change.pack(pady=10)
 
-
-root.mainloop()
+aken.config(bg='#8c8c8c')
+aken.mainloop()
