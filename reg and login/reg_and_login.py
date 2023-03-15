@@ -26,6 +26,21 @@ def validate_input():
     elif not password:
         label_status.config(text='Parool ei tohi olla tühi.')
         return False
+    elif len(password) < 8:
+        label_status.config(text='Parool peab olema vähemalt 8 tähemärki pikk.')
+        return False
+    elif not any(c.isupper() for c in password):
+        label_status.config(text='Parool peab sisaldama vähemalt ühte suurtähte.')
+        return False
+    elif not any(c.islower() for c in password):
+        label_status.config(text='Parool peab sisaldama vähemalt ühte väiketähte.')
+        return False
+    elif not any(c.isdigit() for c in password):
+        label_status.config(text='Parool peab sisaldama vähemalt ühte numbrit.')
+        return False
+    elif not any(c in string.punctuation for c in password):
+        label_status.config(text='Parool peab sisaldama vähemalt ühte erimärki.')
+        return False
     else:
         label_status.config(text='')
         return True
@@ -54,11 +69,17 @@ def login():
         label_status.config(text='Sisselogimine õnnestus.')
 
 def generate_password():
-    length = 12
-    chars = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(chars) for _ in range(length))
-    entry_password.delete(0, tk.END)
-    entry_password.insert(0, password)
+    while True:
+        length = 12
+        chars = string.ascii_letters + string.digits + string.punctuation
+        password = "".join(random.choice(chars) for _ in range(length))
+        if (any(char.isupper() for char in password) and
+            any(char.islower() for char in password) and
+            any(char.isdigit() for char in password) and
+            any(char in string.punctuation for char in password)):
+            entry_password.delete(0, tk.END)
+            entry_password.insert(0, password)
+            break
 
 def recover_password():
     username = entry_username.get()
