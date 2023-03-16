@@ -117,21 +117,21 @@ entry_passw = Entry(aken, show='*', font='Arial 14', bg='#cccccc')
 entry_passw.pack()
 
 btn_reg = Button(aken, text='Registreeri', command=register, font='Arial 14')
-btn_reg.pack(pady=10)
+btn_reg.place(x=160,y=180)
 btn_login = Button(aken, text='Logi sisse', command=login, font='Arial 14')
-btn_login.pack()
+btn_login.place(x=290,y=180)
 
 lbl_status = Label(aken, text='', font='Arial 14', bg='#8c8c8c')
 lbl_status.pack(pady=10)
 
 btn_generate = Button(aken, text='Loo parool', command=generate_password, font='Arial 14')
-btn_generate.pack(pady=10)
+btn_generate.place(x=85,y=250)
 
 btn_recover = Button(aken, text='Taasta parool', command=recover_password, font='Arial 14')
-btn_recover.pack(pady=10)
+btn_recover.place(x=205,y=250)
 
 btn_change = Button(aken, text='Muuda salasõna', command=change_password, font='Arial 14')
-btn_change.pack(pady=10)
+btn_change.place(x=345,y=250)
 
 aken.config(bg='#8c8c8c')
 aken.mainloop()
