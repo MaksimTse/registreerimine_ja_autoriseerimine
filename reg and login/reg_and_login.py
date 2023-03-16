@@ -3,19 +3,7 @@ import random
 from tkinter import *
 
 users = {'admin': 'password'}
-
-def change_password():
-    user = entry_username.get()
-    old_passw = entry_passw.get()
-    new_passw = entry_passw.get()
-
-    if user not in users:
-        lbl_status.config(text='Kasutajanime ei leitud.')
-    elif users[user] != old_passw:
-        lbl_status.config(text='Vale salasõna.')
-    else:
-        users[user] = new_passw
-        lbl_status.config(text='Salasõna muutmine õnnestus.')
+path = 'C:\Users\opilane\source\repos\TARpv22 Maksim_Tsepelevits\Visisilica\Visisilica'
 
 def validate_input():
     user = entry_username.get()
@@ -24,22 +12,22 @@ def validate_input():
         lbl_status.config(text='Kasutajanimi ei tohi olla tühi.')
         return False
     elif not passw:
-        lbl_status.config(text='Parool ei tohi olla tühi.')
+        lbl_status.config(text='Salasõna ei tohi olla tühi.')
         return False
     elif len(passw) < 8:
-        lbl_status.config(text='Parool peab olema vähemalt 8 tähemärki pikk.')
+        lbl_status.config(text='Salasõna peab olema vähemalt 8 tähemärki pikk.')
         return False
     elif not any(c.isupper() for c in passw):
-        lbl_status.config(text='Parool peab sisaldama vähemalt ühte suurtähte.')
+        lbl_status.config(text='Salasõna peab sisaldama vähemalt ühte suurtähte.')
         return False
     elif not any(c.islower() for c in passw):
-        lbl_status.config(text='Parool peab sisaldama vähemalt ühte väiketähte.')
+        lbl_status.config(text='Salasõna peab sisaldama vähemalt ühte väiketähte.')
         return False
     elif not any(c.isdigit() for c in passw):
-        lbl_status.config(text='Parool peab sisaldama vähemalt ühte numbrit.')
+        lbl_status.config(text='Salasõna peab sisaldama vähemalt ühte numbrit.')
         return False
     elif not any(c in string.punctuation for c in passw):
-        lbl_status.config(text='Parool peab sisaldama vähemalt ühte erimärki.')
+        lbl_status.config(text='Salasõna peab sisaldama vähemalt ühte erimärki.')
         return False
     else:
         lbl_status.config(text='')
@@ -67,6 +55,7 @@ def login():
         lbl_status.config(text='Vale salasõna.')
     else:
         lbl_status.config(text='Sisselogimine õnnestus.')
+        
 
 def generate_password():
     while True:
@@ -87,7 +76,7 @@ def recover_password():
         lbl_status.config(text='Kasutajanime ei leitud.')
     else:
         password = users[user]
-        lbl_status.config(text=f'Sinu parool on {password}.')
+        lbl_status.config(text=f'Sinu salasõna on {password}.')
 
 def change_password():
 
@@ -101,9 +90,21 @@ def change_password():
         users[user] = passw
         lbl_status.config(text='Salasõna muutmine õnnestus.')
 
+def change_password():
+    user = entry_username.get()
+    old_passw = entry_passw.get()
+    new_passw = entry_passw.get()
+
+    if user not in users:
+        lbl_status.config(text='Kasutajanime ei leitud.')
+    elif users[user] != old_passw:
+        lbl_status.config(text='Vale salasõna.')
+    else:
+        users[user] = new_passw
+        lbl_status.config(text='Salasõna muutmine õnnestus.')
 
 aken = Tk()
-aken.geometry('550x600')
+aken.geometry('550x400')
 aken.title('Kasutaja registreerimine ja autoriseerimine')
 
 lbl_username = Label(aken, text='Kasutajanimi:', font='Arial 14')
