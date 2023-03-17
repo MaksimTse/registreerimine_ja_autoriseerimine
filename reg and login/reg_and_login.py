@@ -2,8 +2,12 @@ import string
 import random
 from tkinter import *
 
-users = {'admin': 'password'}
-path = 'C:\Users\opilane\source\repos\TARpv22 Maksim_Tsepelevits\Visisilica\Visisilica'
+users = {}
+
+with open('DataBase.txt', 'r') as i:
+    for line in i:
+        user, password = line.strip().split(':')
+        users[user] = password
 
 def validate_input():
     user = entry_username.get()
@@ -42,6 +46,8 @@ def register():
         lbl_status.config(text='Kasutajanimi on juba võetud.')
     else:
         users[user] = passw
+        with open('DataBase.txt', 'a') as f:
+            f.write(f'{user}:{passw}\n')
         lbl_status.config(text='Kasutaja registreerimine õnnestus.')
 
 def login():
@@ -79,15 +85,19 @@ def recover_password():
         lbl_status.config(text=f'Sinu salasõna on {password}.')
 
 def change_password():
-
-    if not validate_input():
-        return
     user = entry_username.get()
-    passw = entry_passw.get()
+    old_passw = entry_passw.get()
+    new_passw = entry_passw.get()
+
     if user not in users:
         lbl_status.config(text='Kasutajanime ei leitud.')
+    elif users[user] != old_passw:
+        lbl_status.config(text='Vale salasõna.')
     else:
-        users[user] = passw
+        users[user] = new_passw
+        with open('DataBase.txt', 'w') as f:
+            for user, password in users.items():
+                f.write(f'{user}:{password}\n')
         lbl_status.config(text='Salasõna muutmine õnnestus.')
 
 def change_password():
