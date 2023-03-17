@@ -91,8 +91,6 @@ def change_password():
 
     if user not in users:
         lbl_status.config(text='Kasutajanime ei leitud.')
-    elif users[user] != old_passw:
-        lbl_status.config(text='Vale salasõna.')
     else:
         users[user] = new_passw
         with open('DataBase.txt', 'w') as f:
@@ -100,18 +98,6 @@ def change_password():
                 f.write(f'{user}:{password}\n')
         lbl_status.config(text='Salasõna muutmine õnnestus.')
 
-def change_password():
-    user = entry_username.get()
-    old_passw = entry_passw.get()
-    new_passw = entry_passw.get()
-
-    if user not in users:
-        lbl_status.config(text='Kasutajanime ei leitud.')
-    elif users[user] != old_passw:
-        lbl_status.config(text='Vale salasõna.')
-    else:
-        users[user] = new_passw
-        lbl_status.config(text='Salasõna muutmine õnnestus.')
 
 aken = Tk()
 aken.geometry('550x400')
