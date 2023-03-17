@@ -102,6 +102,7 @@ def change_password():
 aken = Tk()
 aken.geometry('550x400')
 aken.title('Kasutaja registreerimine ja autoriseerimine')
+aken.resizable(False,False)
 
 lbl_username = Label(aken, text='Kasutajanimi:', font='Arial 14')
 lbl_username.pack(pady=8)
