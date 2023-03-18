@@ -1,6 +1,9 @@
 import string
 import random
+from tkinter import filedialog
 from tkinter import *
+import subprocess
+import os
 
 users = {}
 
@@ -8,6 +11,30 @@ with open('DataBase.txt', 'r') as i:
     for line in i:
         user, password = line.strip().split(':')
         users[user] = password
+
+def open_file():
+    root = Tk()
+    root.title("Open File")
+
+    label = Label(root, text="Do you want to play the game?")
+    label.pack()
+
+    def yes():
+        root.destroy()
+        filename = "Visilica.py"
+        subprocess.call(['python', filename])
+
+    def no():
+        root.destroy()
+
+    button_yes = Button(root, text="Yes", command=yes)
+    button_yes.pack(side="left", padx=10)
+
+    button_no = Button(root, text="No", command=no)
+    button_no.pack(side="right", padx=10)
+
+    root.mainloop()
+
 
 def validate_input():
     user = entry_username.get()
@@ -61,6 +88,8 @@ def login():
         lbl_status.config(text='Vale salasõna.')
     else:
         lbl_status.config(text='Sisselogimine õnnestus.')
+        if user == "max":
+            open_file()
         
 
 def generate_password():
