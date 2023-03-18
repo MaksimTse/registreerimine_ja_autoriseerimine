@@ -13,27 +13,26 @@ with open('DataBase.txt', 'r') as i:
         users[user] = password
 
 def open_file():
-    root = Tk()
-    root.title("Open File")
-
-    label = Label(root, text="Do you want to play the game?")
+    k = Tk()
+    k.title("Küsimus")
+    k.geometry('1920x1080')
+    label = Label(k, text="tahad timukat mängida?",font='Arial 80')
     label.pack()
 
-    def yes():
-        root.destroy()
+    def y():
+        k.destroy()
         filename = "Visilica.py"
         subprocess.call(['python', filename])
+    def n():
+        k.destroy()
 
-    def no():
-        root.destroy()
+    btn_y = Button(k, text="Jah!", font='Arial 180',bg='lightgreen', command=y)
+    btn_y.pack(side="left", padx=90)
 
-    button_yes = Button(root, text="Yes", command=yes)
-    button_yes.pack(side="left", padx=10)
+    btn_n = Button(k, text="Ei",font='Arial 180',width='5',bg='red',command=n)
+    btn_n.pack(side="right", padx=90)
 
-    button_no = Button(root, text="No", command=no)
-    button_no.pack(side="right", padx=10)
-
-    root.mainloop()
+    k.mainloop()
 
 
 def validate_input():
