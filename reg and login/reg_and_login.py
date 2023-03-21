@@ -1,9 +1,7 @@
 import string
 import random
-from tkinter import filedialog
 from tkinter import *
 import subprocess
-import os
 
 users = {}
 
@@ -16,13 +14,12 @@ def open_file():
     k = Tk()
     k.title("Küsimus")
     k.geometry('1920x1080')
-    label = Label(k, text="tahad timukat mängida?",font='Arial 80')
+    label = Label(k, text="Kas jätkata diskrimineerivas kalkulaatoris?",font='Arial 70')
     label.pack()
-
     def y():
         k.destroy()
-        filename = "Visilica.py"
-        subprocess.call(['python', filename])
+        filename2 = "Calc.py"
+        subprocess.call(['python', filename2])
     def n():
         k.destroy()
 
@@ -33,6 +30,28 @@ def open_file():
     btn_n.pack(side="right", padx=90)
 
     k.mainloop()
+
+def open_file2():
+    k2 = Tk()
+    k2.title("Küsimus")
+    k2.geometry('1920x1080')
+    label = Label(k2, text="tahad timukat mängida?",font='Arial 70')
+    label.pack()
+
+    def y2():
+        k2.destroy()
+        filename = "Visilica.py"
+        subprocess.call(['python', filename])
+    def n2():
+        k2.destroy()
+
+    btn_y = Button(k2, text="Jah!", font='Arial 180',bg='lightgreen', command=y2)
+    btn_y.pack(side="left", padx=90)
+
+    btn_n = Button(k2, text="Ei",font='Arial 180',width='5',bg='red',command=n2)
+    btn_n.pack(side="right", padx=90)
+
+    k2.mainloop()
 
 
 def validate_input():
@@ -88,7 +107,11 @@ def login():
     else:
         lbl_status.config(text='Sisselogimine õnnestus.')
         if user == "max":
+            open_file2()
+            lbl_status.config(text='Sisselogimine õnnestus.')
+        else:
             open_file()
+            lbl_status.config(text='Sisselogimine õnnestus.')
         
 
 def generate_password():
