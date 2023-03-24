@@ -70,5 +70,5 @@ result_lbl = Label(root, text='',bg='#cccccc')
 
 result_lbl.pack(pady=5)
 
-
+root.resizable(False,False)
 root.mainloop()
