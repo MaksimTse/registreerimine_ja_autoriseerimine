@@ -5,6 +5,11 @@ import subprocess
 
 users = {}
 
+aken = Tk()
+aken.geometry('550x400')
+aken.title('Kasutaja registreerimine ja autoriseerimine')
+aken.resizable(False,False)
+
 with open('DataBase.txt', 'r') as i:
     for line in i:
         user, password = line.strip().split(':')
@@ -14,7 +19,8 @@ def open_file():
     k = Tk()
     k.title("Küsimus")
     k.geometry('1920x1080')
-    label = Label(k, text="Kas jätkata diskrimineerivas kalkulaatoris?",font='Arial 70')
+    k.configure(background='#8c8c8c')
+    label = Label(k, text="Kas jätkata diskriminant kalkulaatoris?",font='Arial 70',bg='#8c8c8c')
     label.pack()
     def y():
         k.destroy()
@@ -35,7 +41,8 @@ def open_file2():
     k2 = Tk()
     k2.title("Küsimus")
     k2.geometry('1920x1080')
-    label = Label(k2, text="tahad timukat mängida?",font='Arial 70')
+    k2.configure(background='#8c8c8c')
+    label = Label(k2, text="Tahad visilica mängida?",font='Arial 70',bg='#8c8c8c')
     label.pack()
 
     def y2():
@@ -52,7 +59,6 @@ def open_file2():
     btn_n.pack(side="right", padx=90)
 
     k2.mainloop()
-
 
 def validate_input():
     user = entry_username.get()
@@ -112,7 +118,6 @@ def login():
         else:
             open_file()
             lbl_status.config(text='Sisselogimine õnnestus.')
-        
 
 def generate_password():
     while True:
@@ -148,12 +153,6 @@ def change_password():
             for user, password in users.items():
                 f.write(f'{user}:{password}\n')
         lbl_status.config(text='Salasõna muutmine õnnestus.')
-
-
-aken = Tk()
-aken.geometry('550x400')
-aken.title('Kasutaja registreerimine ja autoriseerimine')
-aken.resizable(False,False)
 
 lbl_username = Label(aken, text='Kasutajanimi:', font='Arial 14')
 lbl_username.pack(pady=8)
