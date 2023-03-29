@@ -3,6 +3,7 @@ import random
 
 mang = Tk()
 mang.title('Arva ära Sõna!')
+mang.iconbitmap('favicon.ico')
 
 animals_est = ['tiiger', 'lõvi', 'kaelkirjak', 'elevant', 'ahv', 'zeebra']
 drinks_est = ['kohv', 'tee', 'mahl', 'õlut', 'vesi', 'limonaad']
@@ -63,7 +64,7 @@ def light():
     rus_btn.config(bg='#e3e3e3',fg='#121212')
     new_btn.config(bg='#e3e3e3')
 
-def set_language_estonian():
+def est():
     global word
     global word_list
     global mis
@@ -71,7 +72,8 @@ def set_language_estonian():
 
     new()
 
-    word_list = [animals_est, drinks_est, food_est, prog_est, country_est]
+    words_est = [animals_est, drinks_est, food_est, prog_est, country_est]
+    word_list = [words_est]
     animals_btn.config(text="Loomad")
     drinks_btn.config(text="Joogid")
     food_btn.config(text="Toit")
@@ -87,9 +89,9 @@ def set_language_estonian():
     choice_lbl.config(text='Vali teema!')
     dark_btn.config(text='Tume')
     light_btn.config(text='hele')
-    word_list = [words_est]
+    return word_list
 
-def set_language_russian():
+def russ():
     global word
     global word_list
     global mis
@@ -97,7 +99,7 @@ def set_language_russian():
 
     new()
 
-    word_list = [animals_rus, drinks_rus, food_rus, prog_rus, country_rus]
+    word_list=[animals_rus, drinks_rus, food_rus, prog_rus, country_rus]
     animals_btn.config(text="Животные")
     drinks_btn.config(text="Напитки")
     food_btn.config(text="Еда")
@@ -113,6 +115,7 @@ def set_language_russian():
     mang.title('Угадай Слово!')
     dark_btn.config(text='Тёмная')
     light_btn.config(text='Светлая')
+    return word_list
 
 def close():
     k = Tk()
@@ -161,7 +164,8 @@ def choose_animals():
     for letter in word:
         disp_word += '_ '
     word_lbl.config(text=disp_word)
-        
+    return word_list
+
 def choose_drinks():
     global word_list
     global word
@@ -180,6 +184,7 @@ def choose_drinks():
     for letter in word:
         disp_word += '_ '
     word_lbl.config(text=disp_word)
+    return word_list
         
 def choose_food():
     global word_list
@@ -199,6 +204,7 @@ def choose_food():
     for letter in word:
         disp_word += '_ '
     word_lbl.config(text=disp_word)
+    return word_list
 
 def choose_prog():
     global word_list
@@ -218,6 +224,7 @@ def choose_prog():
     for letter in word:
         disp_word += '_ '
     word_lbl.config(text=disp_word)
+    return word_list
 
 def choose_country():
     global word_list
@@ -237,6 +244,7 @@ def choose_country():
     for letter in word:
         disp_word += '_ '
     word_lbl.config(text=disp_word)
+    return word_list
 
 for img_file in ['vis6.png','vis1.png', 'vis2.png', 'vis3.png', 'vis4.png', 'vis5.png']:
     img = PhotoImage(file=img_file)
@@ -252,7 +260,7 @@ def new():
     guesses = ''
     mis = 0
     if word_list == [words_est]:
-            mis_lbl.config(text=f'Vead: {mis}/{max_mis}',fg='green')
+        mis_lbl.config(text=f'Vead: {mis}/{max_mis}',fg='green')
     else:
         mis_lbl.config(text=f'Ошибки: {mis}/{max_mis}',fg='green')
 
@@ -305,12 +313,10 @@ def check_guess():
         
         if '_' not in display_word:
             if word_list == [words_est]:
-                result_lbl.config(text='Palju õnne! Sa arvasid sõna.',font='Arial 25')
-            else:
-                result_lbl.config(text='Поздравляем! Вы угадали слово.',font='Arial 22')
-            if word_list == [words_est]:
+                result_lbl.config(text='Palju õnne! Sa arvasid sõna.',font='Arial 22')
                 mis_lbl.config(text=f'Vead: {mis}/{max_mis}',fg='green')
             else:
+                result_lbl.config(text='Поздравляем! Вы угадали слово.',font='Arial 16')
                 mis_lbl.config(text=f'Ошибки: {mis}/{max_mis}',fg='green')
             tahvel = Canvas(mang, width=300, height=300)
             tahvel.create_image(2, 2, image=image_list[mis], anchor=NW)
@@ -358,37 +364,37 @@ def check_guess():
 f=Frame(mang,bg='#141414')
 f2=Frame(mang,bg='#141414')
 
-choice_lbl = Label(f2, text='Vali teema!',font='Arial 15',bg='#141414', fg='#FFFFFF')
+choice_lbl = Label(f2, text='Vali teema!',font='Arial 15',width='16',bg='#141414', fg='#FFFFFF')
 choice_lbl.pack(pady=10,padx=40)
 
-animals_btn = Button(f2, text='Loomad',bg='#141414',fg='red', command=choose_animals)
+animals_btn = Button(f2, text='Loomad',bg='#141414',fg='red',width='16', command=choose_animals)
 animals_btn.pack(pady=10,padx=40)
     
-drinks_btn = Button(f2, text='Joogid',bg='#141414',fg='orange', command=choose_drinks)
+drinks_btn = Button(f2, text='Joogid',bg='#141414',fg='orange',width='16', command=choose_drinks)
 drinks_btn.pack(pady=10,padx=40)
     
-food_btn = Button(f2, text='Toit',bg='#141414',fg='yellow', command=choose_food)
+food_btn = Button(f2, text='Toit',bg='#141414',fg='yellow',width='16', command=choose_food)
 food_btn.pack(pady=10,padx=40)
 
-prog_btn = Button(f2, text='Programmeerimine',bg='#141414',fg='lightgreen', command=choose_prog)
+prog_btn = Button(f2, text='Programmeerimine',bg='#141414',fg='lightgreen',width='16', command=choose_prog)
 prog_btn.pack(pady=10,padx=40)
     
-country_btn = Button(f2, text='Riigid',bg='#141414',fg='lightblue', command=choose_country)
+country_btn = Button(f2, text='Riigid',bg='#141414',fg='lightblue',width='16', command=choose_country)
 country_btn.pack(pady=10,padx=40)
 
-instructions_lbl = Label(f, text='Arva ära sõna!',font='Arial 24',bg='#141414', fg='#FFFFFF')
+instructions_lbl = Label(f, text='Arva ära sõna!',font='Arial 24',bg='#141414',width='16', fg='#FFFFFF')
 instructions_lbl.pack(pady=32)
 
-word_lbl = Label(f, text='',bg='#141414',fg='#FFFFFF',font='Arial 18')
+word_lbl = Label(f, text='',bg='#141414',fg='#FFFFFF',width='16',font='Arial 18')
 word_lbl.pack(pady=10)
 
-guess_entry = Entry(f, width=1,font='Arial 30')
+guess_entry = Entry(f, width='1',font='Arial 30')
 guess_entry.pack(pady=10)
 
 check_btn = Button(f, text='Kontrolli',bg='#141414',fg='#FFFFFF',width='18',font='Arial 16',command=check_guess)
 check_btn.pack(pady=10)
 
-result_lbl = Label(f, text='',bg='#141414', fg='#FFFFFF')
+result_lbl = Label(f, text='',bg='#141414', fg='#FFFFFF',)
 result_lbl.pack(pady=8)
 
 mis_lbl = Label(f, text=f'Vaed: {mis}/{max_mis}',bg='#141414', fg='#FFFFFF',width='18',font='Arial 16')
@@ -397,25 +403,26 @@ mis_lbl.pack(pady=8)
 new_btn = Label(f, bg="#141414",width='70')
 new_btn.pack(pady=5)
 
-close_btn = Button(f2, text='Sule', bg='red',font='Arial 8',command=close)
+close_btn = Button(f2, text='Sule', bg='red',font='Arial 8',width='12',command=close)
 close_btn.pack(pady=60,padx=25)
 
-light_btn = Button(f2, text="Hele",bg='#e3e3e3',fg='#121212',command=light)
+light_btn = Button(f2, text="Hele",bg='#e3e3e3',fg='#121212',width='12',command=light)
 light_btn.place(y=290, x=34)
 
-dark_btn = Button(f2, text="Tume",bg='#141414',fg='#FFFFFF',command=dark)
+dark_btn = Button(f2, text="Tume",bg='#141414',fg='#FFFFFF',width='12',command=dark)
 dark_btn.place(y=290, x=125)
 
-rus_btn = Button(f, text="На русском",bg='#141414',fg='#FFFFFF',command=set_language_russian)
+rus_btn = Button(f, text="На русском",bg='#141414',fg='#FFFFFF',width='12',command=russ)
 rus_btn.place(x=160)
 
-est_btn = Button(f, text="Eesti keeles",bg='#141414',fg='#FFFFFF',command=set_language_estonian)
+est_btn = Button(f, text="Eesti keeles",bg='#141414',fg='#FFFFFF',width='12',command=est)
 est_btn.place(x=270)
 
 f.grid(row=0,column=1)
 f2.grid(row=0,column=0)
 
 new()
+
 mang.resizable(False,False)
 mang.geometry('1070x400')
 mang.configure(background='#141414')
